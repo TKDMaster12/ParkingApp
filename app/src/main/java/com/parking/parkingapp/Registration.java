@@ -9,17 +9,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.InjectView;
+import butterknife.BindView;
 
 public class Registration extends AppCompatActivity {
 
-    @InjectView(R.id.first_name) EditText _firstnameText;
-    @InjectView(R.id.last_name) EditText _lastnameText;
-    @InjectView(R.id.input_email) EditText _emailText;
-    @InjectView(R.id.input_password) EditText _passwordText;
-    @InjectView(R.id.username) EditText _usernameText;
-    @InjectView(R.id.btn_signup) Button _signupButton;
-    @InjectView(R.id.link_login) TextView _loginLink;
+    @BindView(R.id.first_name) EditText _firstnameText;
+    @BindView(R.id.last_name) EditText _lastnameText;
+    @BindView(R.id.input_email) EditText _emailText;
+    @BindView(R.id.input_password) EditText _passwordText;
+    @BindView(R.id.username) EditText _usernameText;
+    @BindView(R.id.btn_signup) Button _signupButton;
+    @BindView(R.id.link_login) TextView _loginLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
