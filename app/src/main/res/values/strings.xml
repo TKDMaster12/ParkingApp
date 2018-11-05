@@ -34,4 +34,12 @@
     <string name="registration_email">Email Address</string>
     <string name="registration_password">Password</string>
     <string name="registration_user_name">User Name</string>
+
+    <!-- strings for parking lot page -->
+    <string name="parkinglot_title">Choose a Parking Lot</string>
+    <string name="parkinglot_name">Marshmallow</string>
+    <string name="parkinglot_type">Android 6.0</string>
+    <string name="parkinglot_number">23</string>
+    <string name="parkinglot_api">API: </string>
+
 </resources>
