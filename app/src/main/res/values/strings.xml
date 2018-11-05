@@ -1,15 +1,37 @@
 <resources>
     <string name="app_name">Parking App</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_username">User Name</string>
+    <string name="prompt_email">Email Address</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_remember_me">Remember Me</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="forgot_info">Forgot Info?</string>
+    <string name="new_account">No account yet? Create one</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="app_homepage">Home</string>
+    <string name="title_activity_find__car">Map</string>
+
+    <!-- strings for recover information page -->
+    <string name="recover_send">Send</string>
+    <string name="recover_password_reset">Password Reset</string>
+    <string name="recover_email">Email Address</string>
+    <string name="recover_lost_username">Lost Username?</string>
+
+    <!-- strings for help page -->
+    <string name="help_title">Need Help?</string>
+    <string name="help_call">Call us Now</string>
+    <string name="help_email">E-Mail Us</string>
+
+    <!-- strings for registration page -->
+    <string name="registration_first_name">First Name</string>
+    <string name="registration_last_name">Last Name</string>
+    <string name="registration_email">Email Address</string>
+    <string name="registration_password">Password</string>
+    <string name="registration_user_name">User Name</string>
 </resources>
