@@ -33,6 +33,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -50,28 +53,31 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "foo:hello", "bar:world"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
     private static final int REQUEST_SIGNUP = 0;
+
     // UI references.
-    private AutoCompleteTextView mUserNameView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    @BindView(R.id.username) AutoCompleteTextView mUserNameView;
+    @BindView(R.id.password) EditText mPasswordView;
+    @BindView(R.id.sign_in_button) Button SignInButton;
+    @BindView(R.id.new_account_link) TextView registrationLink;
+    @BindView(R.id.forgot_info_link) TextView forgotInfoLink;
+    @BindView(R.id.login_form) TextView mLoginFormView;
+    @BindView(R.id.login_progress) TextView mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
-        mUserNameView = (AutoCompleteTextView) findViewById(R.id.username);
+
+        ButterKnife.bind(this);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -83,7 +89,6 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
 
-        Button SignInButton = (Button) findViewById(R.id.sign_in_button);
         SignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +96,6 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
 
-        TextView registrationLink = (TextView) findViewById(R.id.new_account_link);
         registrationLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +105,6 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
 
-        TextView forgotInfoLink = (TextView) findViewById(R.id.forgot_info_link);
         forgotInfoLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +113,6 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
 
     public void CallHelpActivity(View view)

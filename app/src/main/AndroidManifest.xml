@@ -28,7 +28,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Login"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,9 +39,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_homepage" />
-        <activity android:name=".Registration" />
+        <activity
+            android:name=".Registration"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Generated_Code" />
-        <activity android:name=".Recover_Information" />
+        <activity
+            android:name=".Recover_Information"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Parking_Lot" />
         <activity android:name=".Help" />
         <!--

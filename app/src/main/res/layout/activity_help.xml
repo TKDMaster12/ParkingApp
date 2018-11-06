@@ -39,8 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/help_call"
-            android:textSize="24sp"
-            android:textColor="#0000FF" />
+            android:textColor="#0000FF"
+            android:textSize="24sp" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/call_button"
@@ -48,8 +48,8 @@
             android:layout_height="128dp"
             android:layout_gravity="center"
             android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:background="@drawable/phone" />
+            android:background="@drawable/phone"
+            android:padding="12dp" />
 
     </LinearLayout>
 
@@ -65,8 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/help_email"
-            android:textSize="24sp"
-            android:textColor="#0000FF" />
+            android:textColor="#0000FF"
+            android:textSize="24sp" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/email_button"
@@ -74,7 +74,7 @@
             android:layout_height="128dp"
             android:layout_gravity="center"
             android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:background="@drawable/email" />
+            android:background="@drawable/email"
+            android:padding="12dp" />
     </LinearLayout>
 </LinearLayout>

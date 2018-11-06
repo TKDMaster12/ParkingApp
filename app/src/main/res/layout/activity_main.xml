@@ -15,15 +15,17 @@
         android:id="@+id/toprow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="95">
+        android:layout_weight="95"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome"
+            android:text="@string/home_title"
             android:textAlignment="center"
             android:textColor="#000"
             android:textSize="50sp" />
+
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -34,8 +36,8 @@
         android:id="@+id/bottomrow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="5">
+        android:layout_weight="5"
+        android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/parking_lot_button"
@@ -59,7 +61,7 @@
             android:layout_height="64dp"
             android:layout_margin="24dp"
             android:background="@drawable/help"
-            android:padding="12dp"
-            android:onClick="CallHelpActivity" />
+            android:onClick="CallHelpActivity"
+            android:padding="12dp" />
     </android.support.v7.widget.LinearLayoutCompat>
 </LinearLayout>

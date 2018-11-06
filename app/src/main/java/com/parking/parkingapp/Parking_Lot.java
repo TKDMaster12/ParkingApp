@@ -9,19 +9,21 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class Parking_Lot extends AppCompatActivity {
 
     ArrayList<DataModel> dataModels;
-    ListView listView;
-    private CustomAdapter adapter;
+    CustomAdapter adapter;
+    @BindView(R.id.list) ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_lot);
 
-        listView = (ListView) findViewById(R.id.list);
-
+        ButterKnife.bind(this);
         dataModels = new ArrayList<>();
 
         dataModels.add(new DataModel("Apple Pie", "Android 1.0", "1", "September 23, 2008"));

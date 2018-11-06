@@ -34,6 +34,8 @@
     <string name="registration_email">Email Address</string>
     <string name="registration_password">Password</string>
     <string name="registration_user_name">User Name</string>
+    <string name="registration_button">Create Account</string>
+    <string name="registration_login_link">Already a member? Login</string>
 
     <!-- strings for parking lot page -->
     <string name="parkinglot_title">Choose a Parking Lot</string>
@@ -42,4 +44,9 @@
     <string name="parkinglot_number">23</string>
     <string name="parkinglot_api">API: </string>
 
+    <!-- strings for generated code page -->
+    <string name="generated_QRcode">QR Code</string>
+
+    <!-- strings for home page -->
+    <string name="home_title">Welcome</string>
 </resources>
