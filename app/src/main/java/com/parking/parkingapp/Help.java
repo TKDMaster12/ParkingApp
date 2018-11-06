@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class Help extends AppCompatActivity {
+
+    private static final int REQUEST_PHONE_CALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,13 @@ public class Help extends AppCompatActivity {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:0377778888"));
 
-                if (ActivityCompat.checkSelfPermission(Help.this,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
+                if (ContextCompat.checkSelfPermission(Help.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Help.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
                 }
-                startActivity(callIntent);
+                else
+                {
+                    startActivity(callIntent);
+                }
             }
         });
     }
