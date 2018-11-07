@@ -1,6 +1,7 @@
 package com.parking.parkingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
@@ -38,11 +39,13 @@ public class Generated_Code extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_code);
+        Intent intent = getIntent();
+        String barcode = intent.getStringExtra("CODE_KEY");
 
         ButterKnife.bind(this);
 
         try {
-            bitmap = TextToImageEncode("This is a prototype", this.getApplicationContext());
+            bitmap = TextToImageEncode(barcode, this.getApplicationContext());
             myImage.setImageBitmap(bitmap);
             String path = saveImage(bitmap);  //give read write permission
             Toast.makeText(Generated_Code.this, "QRCode saved to -> " + path, Toast.LENGTH_SHORT).show();

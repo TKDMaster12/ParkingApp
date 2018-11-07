@@ -1,5 +1,6 @@
 package com.parking.parkingapp;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class Parking_Lot extends AppCompatActivity {
     ArrayList<DataModel> dataModels;
     CustomAdapter adapter;
     @BindView(R.id.list) ListView listView;
+    private static final int REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,13 @@ public class Parking_Lot extends AppCompatActivity {
 
                 DataModel dataModel= dataModels.get(position);
 
-                Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getType()+" API: "+dataModel.getVersion_number(), Snackbar.LENGTH_LONG)
-                        .setAction("No action", null).show();
+
+                Intent intent = new Intent(getApplicationContext(), Generated_Code.class);
+                intent.putExtra("CODE_KEY", dataModel.getName());
+                startActivityForResult(intent, REQUEST_CODE);
+
+             //   Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getType()+" API: "+dataModel.getVersion_number(), Snackbar.LENGTH_LONG)
+               //         .setAction("No action", null).show();
             }
         });
     }
