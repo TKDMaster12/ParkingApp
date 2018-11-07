@@ -14,12 +14,12 @@ import butterknife.ButterKnife;
 
 public class Registration extends AppCompatActivity {
 
-    @BindView(R.id.first_name) EditText _firstnameText;
-    @BindView(R.id.last_name) EditText _lastnameText;
+    @BindView(R.id.first_name) EditText _firstNameText;
+    @BindView(R.id.last_name) EditText _lastNameText;
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_password) EditText _passwordText;
     @BindView(R.id.username) EditText _usernameText;
-    @BindView(R.id.btn_signup) Button _signupButton;
+    @BindView(R.id.btn_SignUp) Button _signUpButton;
     @BindView(R.id.link_login) TextView _loginLink;
 
     @Override
@@ -29,10 +29,10 @@ public class Registration extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        _signupButton.setOnClickListener(new View.OnClickListener() {
+        _signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signup();
+                signUp();
             }
         });
 
@@ -45,14 +45,14 @@ public class Registration extends AppCompatActivity {
         });
     }
 
-    public void signup() {
+    public void signUp() {
 
         if (!validate()) {
-            onSignupFailed();
+            onSignUpFailed();
             return;
         }
 
-        _signupButton.setEnabled(false);
+        _signUpButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(Registration.this,
                 R.style.Theme_AppCompat_Dialog);
@@ -60,48 +60,48 @@ public class Registration extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _firstnameText.getText().toString();
+        String name = _firstNameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
+        // TODO: Implement your own signUp logic here.
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
+                        // On complete call either onSignUpSuccess or onSignUpFailed
                         // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
+                        onSignUpSuccess();
+                        // onSignUpFailed();
                         progressDialog.dismiss();
                     }
                 }, 3000);
     }
 
-    public void onSignupSuccess() {
-        _signupButton.setEnabled(true);
+    public void onSignUpSuccess() {
+        _signUpButton.setEnabled(true);
         setResult(RESULT_OK, null);
         finish();
     }
 
-    public void onSignupFailed() {
+    public void onSignUpFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
-        _signupButton.setEnabled(true);
+        _signUpButton.setEnabled(true);
     }
 
     public boolean validate() {
         boolean valid = true;
 
-        String name = _firstnameText.getText().toString();
+        String name = _firstNameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
-            _firstnameText.setError("at least 3 characters");
+            _firstNameText.setError("at least 3 characters");
             valid = false;
         } else {
-            _firstnameText.setError(null);
+            _firstNameText.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

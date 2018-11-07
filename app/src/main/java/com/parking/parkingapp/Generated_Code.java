@@ -90,7 +90,7 @@ public class Generated_Code extends AppCompatActivity {
         try {
             bitMatrix = new MultiFormatWriter().encode(
                     Value,
-                    BarcodeFormat.DATA_MATRIX.QR_CODE,
+                    BarcodeFormat.QR_CODE,
                     QRcodeWidth, QRcodeHeight, null
             );
 

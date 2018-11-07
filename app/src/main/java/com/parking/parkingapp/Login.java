@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-    private static final int REQUEST_SIGNUP = 0;
+    private static final int REQUEST_SIGN_UP = 0;
 
     // UI references.
     @BindView(R.id.username)
@@ -85,9 +85,9 @@ public class Login extends AppCompatActivity {
         registrationLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
+                // Start the SignUp activity
                 Intent intent = new Intent(getApplicationContext(), Registration.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                startActivityForResult(intent, REQUEST_SIGN_UP);
             }
         });
 
@@ -96,7 +96,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the Forgot Information activity
                 Intent intent = new Intent(getApplicationContext(), Recover_Information.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                startActivityForResult(intent, REQUEST_SIGN_UP);
             }
         });
 
@@ -104,7 +104,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Help.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                startActivityForResult(intent, REQUEST_SIGN_UP);
             }
         });
     }

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/parkinglot_title"
+        android:text="@string/parkingLot_title"
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="30sp" />
