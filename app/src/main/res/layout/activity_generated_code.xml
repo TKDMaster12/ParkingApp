@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Generated_Code">
 
-    <ImageView android:layout_width="match_parent"
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imageView"
-        android:contentDescription="QRcode"/>
+        android:contentDescription="@string/generated_QRcode"/>
 
 </android.support.constraint.ConstraintLayout>

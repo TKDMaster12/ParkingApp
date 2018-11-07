@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class Recover_Information extends AppCompatActivity {
 
@@ -24,16 +26,17 @@ public class Recover_Information extends AppCompatActivity {
     private UserRecoveryTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private View mProgressView;
-    private View mRecoveryFormView;
+    @BindView(R.id.email_password) AutoCompleteTextView mEmailView;
+    @BindView(R.id.send_password_button) Button SendPasswordButton;
+    @BindView(R.id.recover_information_form) View mRecoveryFormView;
+    @BindView(R.id.recovery_progress) View mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recover_information);
 
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email_password);
+        ButterKnife.bind(this);
         mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -45,16 +48,12 @@ public class Recover_Information extends AppCompatActivity {
             }
         });
 
-        Button SendPasswordButton = (Button) findViewById(R.id.send_password_button);
         SendPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptSend();
             }
         });
-
-        mRecoveryFormView = findViewById(R.id.recover_information_form);
-        mProgressView = findViewById(R.id.recovery_progress);
     }
 
     private void attemptSend() {

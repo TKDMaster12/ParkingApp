@@ -28,6 +28,7 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         ButterKnife.bind(this);
+
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

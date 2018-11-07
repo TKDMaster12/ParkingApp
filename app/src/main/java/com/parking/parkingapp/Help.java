@@ -12,33 +12,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class Help extends AppCompatActivity {
 
     private static final int REQUEST_PHONE_CALL = 1;
+    @BindView(R.id.email_button) Button EmailBtn;
+    @BindView(R.id.call_button) Button PhoneBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        Button EmailBtn = (Button) findViewById(R.id.email_button);
+        ButterKnife.bind(this);
+
         EmailBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 sendEmail();
             }
         });
 
-        Button PhoneBtn = (Button) findViewById(R.id.call_button);
         PhoneBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
+            public void onClick(View view) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:0377778888"));
 
                 if (ContextCompat.checkSelfPermission(Help.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(Help.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
-                }
-                else
-                {
+                } else {
                     startActivity(callIntent);
                 }
             }
