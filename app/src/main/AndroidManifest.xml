@@ -30,15 +30,15 @@
             android:name=".Login"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_homepage" />
+            android:label="@string/app_homepage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Registration"
             android:windowSoftInputMode="stateHidden" />
@@ -48,6 +48,9 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Parking_Lot" />
         <activity android:name=".Help" />
+        <activity
+            android:name=".Find_Car"
+            android:label="@string/title_activity_find__car" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,10 +62,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".Find_Car"
-            android:label="@string/title_activity_find__car" />
     </application>
 
 </manifest>
