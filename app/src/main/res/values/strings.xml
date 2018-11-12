@@ -22,6 +22,7 @@
     <string name="recover_password_reset">Password Reset</string>
     <string name="recover_email">Email Address</string>
     <string name="recover_lost_username">Lost Username?</string>
+    <string name="recover_result">An email is sent to your email address that contains the link to reset the password.</string>
 
     <!-- strings for help page -->
     <string name="help_title">Need Help?</string>
@@ -36,6 +37,7 @@
     <string name="registration_user_name">User Name</string>
     <string name="registration_button">Create Account</string>
     <string name="registration_login_link">Already a member? Login</string>
+    <string name="registration_result">A confirmation email has been sent to your email address.</string>
 
     <!-- strings for parking lot page -->
     <string name="parkingLot_title">Choose a Parking Lot</string>
