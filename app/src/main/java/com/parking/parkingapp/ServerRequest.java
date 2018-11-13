@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import org.json.JSONObject;
 
 public class ServerRequest {
-    public static final String SERVER_ADDRESS = "http://localhost:8080/";
+    public static final String SERVER_ADDRESS = "http://localhost/Parking App/";
 
     public ServerRequest(Context context) {
     }
@@ -117,7 +117,7 @@ public class ServerRequest {
         protected User doInBackground(Void... params) {
             RequestPackage p = new RequestPackage();
             p.setMethod("POST");
-            p.setUri(SERVER_ADDRESS + "Register.php");
+            p.setUri(SERVER_ADDRESS + "registration.php");
             p.setParam("name", user.name);
             p.setParam("email", user.email);
             p.setParam("username", user.username);

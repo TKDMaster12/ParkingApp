@@ -20,16 +20,26 @@ import butterknife.ButterKnife;
 
 public class Registration extends AppCompatActivity {
 
-    @BindView(R.id.first_name) EditText _firstNameText;
-    @BindView(R.id.last_name) EditText _lastNameText;
-    @BindView(R.id.input_email) EditText _emailText;
-    @BindView(R.id.input_password) EditText _passwordText;
-    @BindView(R.id.username) EditText _usernameText;
-    @BindView(R.id.btn_SignUp) Button _signUpButton;
-    @BindView(R.id.link_login) TextView _loginLink;
-    @BindView(R.id.registration_form) View mRegistrationFormView;
-    @BindView(R.id.registration_progress) View mProgressView;
-    @BindView(R.id.messageLayout) View messageLayout;
+    @BindView(R.id.first_name)
+    EditText _firstNameText;
+    @BindView(R.id.last_name)
+    EditText _lastNameText;
+    @BindView(R.id.input_email)
+    EditText _emailText;
+    @BindView(R.id.input_password)
+    EditText _passwordText;
+    @BindView(R.id.username)
+    EditText _usernameText;
+    @BindView(R.id.btn_SignUp)
+    Button _signUpButton;
+    @BindView(R.id.link_login)
+    TextView _loginLink;
+    @BindView(R.id.registration_form)
+    View mRegistrationFormView;
+    @BindView(R.id.registration_progress)
+    View mProgressView;
+    @BindView(R.id.messageLayout)
+    View messageLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,14 +132,13 @@ public class Registration extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private void registerUser(User user){
+    private void registerUser(User user) {
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.storeUserDataInBackground(user, new GetUserCallBack() {
             @Override
             public void done(User returnedUser) {
                 showProgress(false);
-                if (returnedUser == null)
-                {
+                if (returnedUser == null) {
                     mRegistrationFormView.setVisibility(View.GONE);
                     messageLayout.setVisibility(View.VISIBLE);
                     new Timer().schedule(new TimerTask() {
@@ -141,15 +150,14 @@ public class Registration extends AppCompatActivity {
                             startActivityForResult(intent, 0);
                         }
                     }, 3000);
-                }
-                else
-                {
+                } else {
                     _usernameText.setError(getString(R.string.error_incorrect_password));
                     _usernameText.requestFocus();
                 }
             }
         });
     }
+
     /**
      * Shows the progress UI and hides the login form.
      */
