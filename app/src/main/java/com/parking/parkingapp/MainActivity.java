@@ -1,6 +1,8 @@
 package com.parking.parkingapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.parking_lot_button) Button parkingBtn;
     @BindView(R.id.find_car_button) Button findCarBtn;
     @BindView(R.id.username) TextView userName;
+    @BindView(R.id.logout_button) Button logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertDialog();
+            }
+        });
+
         userLocalStore = new UserLocalStore(this);
     }
 
@@ -73,6 +83,26 @@ public class MainActivity extends AppCompatActivity {
     {
         user = userLocalStore.getLoggedInUser();
         userName.setText(user.username);
+    }
+
+    public void showAlertDialog()
+    {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        dialogBuilder.setTitle("Log Out");
+        dialogBuilder.setMessage("Are you sure you want to Log Out?");
+        dialogBuilder.setPositiveButton("LOG OUT", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                userLocalStore.clearUserData();
+                userLocalStore.setUserLoggedIn(false);
+                finish();
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+        dialogBuilder.setNegativeButton("CANCEL", null);
+        dialogBuilder.setCancelable(false);
+        dialogBuilder.show();
     }
 
     @Override

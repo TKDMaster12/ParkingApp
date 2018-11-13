@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import org.json.JSONObject;
 
 public class ServerRequest {
-    public static final String SERVER_ADDRESS = "http://localhost/Parking App/";
+    public static final String SERVER_ADDRESS = "http://web-meisternj.com/Parking App/";
 
     public ServerRequest(Context context) {
     }
