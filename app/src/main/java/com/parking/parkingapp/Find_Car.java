@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Find_Car extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
