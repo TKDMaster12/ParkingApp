@@ -3,7 +3,7 @@ package com.parking.parkingapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,21 +15,20 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Recover_Information extends AppCompatActivity {
-
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserRecoveryTask mAuthTask = null;
 
     // UI references.
     @BindView(R.id.email_password) AutoCompleteTextView mEmailView;
     @BindView(R.id.send_password_button) Button SendPasswordButton;
     @BindView(R.id.recover_information_form) View mRecoveryFormView;
     @BindView(R.id.recovery_progress) View mProgressView;
+    @BindView(R.id.messageLayout) View messageLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +56,6 @@ public class Recover_Information extends AppCompatActivity {
     }
 
     private void attemptSend() {
-        if (mAuthTask != null) {
-            return;
-        }
-
         // Reset errors.
         mEmailView.setError(null);
 
@@ -82,21 +77,20 @@ public class Recover_Information extends AppCompatActivity {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // There was an error; don't attempt recover and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            // perform the user recovery attempt.
             showProgress(true);
-            mAuthTask = new UserRecoveryTask(email);
-            mAuthTask.execute((Void) null);
+            User user = new User(email);
+            sendPassword(user);
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+    private boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     /**
@@ -128,48 +122,29 @@ public class Recover_Information extends AppCompatActivity {
         });
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserRecoveryTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-
-        UserRecoveryTask(String email) {
-            mEmail = email;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+    private void sendPassword(User user) {
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.SendEmailDataInBackground(user, new GetUserCallBack() {
+            @Override
+            public void done(User returnedUser) {
+                showProgress(false);
+                if (returnedUser == null) {
+                    mRecoveryFormView.setVisibility(View.GONE);
+                    messageLayout.setVisibility(View.VISIBLE);
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            // this code will be executed after 3 seconds
+                            finish();
+                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                            startActivityForResult(intent, 0);
+                        }
+                    }, 3000);
+                } else {
+                    mEmailView.setError(getString(R.string.error_invalid_email));
+                    mEmailView.requestFocus();
+                }
             }
-
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                //error
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
+        });
     }
 }
