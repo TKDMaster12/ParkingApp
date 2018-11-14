@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class ServerRequest {
     public static final String SERVER_ADDRESS = "http://web-meisternj.com/Parking%20App/";
 

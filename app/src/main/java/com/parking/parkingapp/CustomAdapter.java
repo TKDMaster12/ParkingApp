@@ -9,9 +9,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class CustomAdapter extends ArrayAdapter<DataModel> {
+public class CustomAdapter extends ArrayAdapter<ParkingLotModel> {
 
     private Context mContext;
 
@@ -23,7 +23,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> {
         TextView txtAmountLeft;
     }
 
-    CustomAdapter(ArrayList<DataModel> data, Context context) {
+    CustomAdapter(List<ParkingLotModel> data, Context context) {
         super(context, R.layout.parking_lot_item, data);
         this.mContext = context;
     }
@@ -33,7 +33,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        DataModel dataModel = getItem(position);
+        ParkingLotModel parkingLotModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
 
@@ -61,10 +61,10 @@ public class CustomAdapter extends ArrayAdapter<DataModel> {
         result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.txtName.setText(dataModel.getName());
-        viewHolder.txtStatus.setText(dataModel.getStatus());
-        viewHolder.txtAmountLeft.setText(dataModel.getAmountLeft());
-        viewHolder.txtTotalAmount.setText(dataModel.getTotalAmount());
+        viewHolder.txtName.setText(parkingLotModel.getName());
+        viewHolder.txtStatus.setText(parkingLotModel.getStatus());
+        viewHolder.txtAmountLeft.setText(parkingLotModel.getAmountLeft());
+        viewHolder.txtTotalAmount.setText(parkingLotModel.getTotalAmount());
         // Return the completed view to render on screen
         return convertView;
     }
