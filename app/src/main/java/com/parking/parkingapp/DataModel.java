@@ -3,30 +3,30 @@ package com.parking.parkingapp;
 public class DataModel {
 
     String name;
-    String type;
-    String version_number;
-    String feature;
+    String status;
+    String totalAmount;
+    String amountLeft;
 
-    public DataModel(String name, String type, String version_number, String feature) {
+    public DataModel(String name, String status, String totalAmount, String amountLeft) {
         this.name = name;
-        this.type = type;
-        this.version_number = version_number;
-        this.feature = feature;
+        this.status = status;
+        this.totalAmount = totalAmount;
+        this.amountLeft = amountLeft;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getType() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
-    public String getVersion_number() {
-        return version_number;
+    public String getTotalAmount() {
+        return totalAmount;
     }
 
-    public String getFeature() {
-        return feature;
+    public String getAmountLeft() {
+        return amountLeft;
     }
 }

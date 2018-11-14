@@ -50,13 +50,9 @@ public class Parking_Lot extends AppCompatActivity {
 
                 DataModel dataModel= dataModels.get(position);
 
-
                 Intent intent = new Intent(getApplicationContext(), Generated_Code.class);
                 intent.putExtra("CODE_KEY", dataModel.getName());
                 startActivityForResult(intent, REQUEST_CODE);
-
-             //   Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getType()+" API: "+dataModel.getVersion_number(), Snackbar.LENGTH_LONG)
-               //         .setAction("No action", null).show();
             }
         });
     }

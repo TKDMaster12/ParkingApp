@@ -8,52 +8,38 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="@string/parkingLot_name"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/black" />
+        android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/type"
+        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
-        android:layout_marginTop="5dp"
-        android:text="@string/parkingLot_type"
-        android:textColor="@android:color/black" />
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/amount_left"
+        android:layout_toEndOf="@+id/name"
+        android:text="@string/parkingLot_status"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/item_info"
+    <TextView
+        android:id="@+id/amount_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/total_amount"
+        android:text="@string/parkingLot_amount_left"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/total_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:src="@android:drawable/ic_dialog_info"
-        android:contentDescription="" />
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-
-        <TextView
-            android:id="@+id/version_heading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/parkingLot_api"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/version_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/parkingLot_number"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:text="@string/parkingLot_total_amount"
+        android:textSize="20sp" />
 
 </RelativeLayout>
