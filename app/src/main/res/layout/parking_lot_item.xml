@@ -29,10 +29,16 @@
         android:id="@+id/amount_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/total_amount"
+        android:layout_toStartOf="@+id/specialCharacter"
         android:text="@string/parkingLot_amount_left"
         android:textSize="20sp" />
-
+    <TextView
+        android:id="@+id/specialCharacter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/total_amount"
+        android:text="@string/parkingLot_specialCharacter"
+        android:textSize="20sp" />
     <TextView
         android:id="@+id/total_amount"
         android:layout_width="wrap_content"

@@ -43,8 +43,9 @@
     <string name="parkingLot_title">Choose a Parking Lot</string>
     <string name="parkingLot_name">Parking Lot A</string>
     <string name="parkingLot_status">Available</string>
-    <string name="parkingLot_amount_left">23/</string>
+    <string name="parkingLot_amount_left">23</string>
     <string name="parkingLot_total_amount">25</string>
+    <string name="parkingLot_specialCharacter">/</string>
 
     <!-- strings for generated code page -->
     <string name="generated_QRcode">QR Code</string>

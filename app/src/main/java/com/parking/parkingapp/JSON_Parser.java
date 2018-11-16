@@ -20,8 +20,8 @@ public class JSON_Parser {
 
                 parkingLotModel.setName(obj.getString("name"));
                 parkingLotModel.setStatus(obj.getString("status"));
-                parkingLotModel.setAmountLeft(obj.getString("AmountLeft"));
-                parkingLotModel.setTotalAmount(obj.getString("TotalAmount"));
+                parkingLotModel.setAmountLeft(obj.getString("amountLeft"));
+                parkingLotModel.setTotalAmount(obj.getString("totalAmount"));
 
                 parkingLotList.add(parkingLotModel);
             }

@@ -40,7 +40,7 @@ public class Generated_Code extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_code);
         Intent intent = getIntent();
-        String barcode = intent.getStringExtra("CODE_KEY");
+        String barcode = intent.getStringExtra("CODE_KEY") + "&" + intent.getStringExtra("CODE_USER");
 
         ButterKnife.bind(this);
 
