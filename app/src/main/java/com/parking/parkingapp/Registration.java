@@ -153,6 +153,7 @@ public class Registration extends AppCompatActivity {
                 } else {
                     _usernameText.setError(getString(R.string.error_incorrect_password));
                     _usernameText.requestFocus();
+                    _signUpButton.setEnabled(true);
                 }
             }
         });
