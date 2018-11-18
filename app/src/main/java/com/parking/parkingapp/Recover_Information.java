@@ -24,8 +24,10 @@ import butterknife.ButterKnife;
 public class Recover_Information extends AppCompatActivity {
 
     // UI references.
-    @BindView(R.id.email_password) AutoCompleteTextView mEmailView;
+    @BindView(R.id.email_password) AutoCompleteTextView mEmailPasswordView;
+    @BindView(R.id.email_username) AutoCompleteTextView mEmailUsernameView;
     @BindView(R.id.send_password_button) Button SendPasswordButton;
+    @BindView(R.id.send_username_button) Button SendUsernameButton;
     @BindView(R.id.recover_information_form) View mRecoveryFormView;
     @BindView(R.id.recovery_progress) View mProgressView;
     @BindView(R.id.messageLayout) View messageLayout;
@@ -36,43 +38,58 @@ public class Recover_Information extends AppCompatActivity {
         setContentView(R.layout.activity_recover_information);
 
         ButterKnife.bind(this);
-        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mEmailPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptSend();
+                    attemptSendPassword();
                     return true;
                 }
                 return false;
             }
         });
-
+        mEmailUsernameView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                    attemptSendUsername();
+                    return true;
+                }
+                return false;
+            }
+        });
         SendPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptSend();
+                attemptSendPassword();
+            }
+        });
+        SendUsernameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptSendUsername();
             }
         });
     }
 
-    private void attemptSend() {
+    private void attemptSendPassword() {
         // Reset errors.
-        mEmailView.setError(null);
+        mEmailPasswordView.setError(null);
 
         // Store values at the time of the recovery attempt.
-        String email = mEmailView.getText().toString();
+        String email = mEmailPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            mEmailPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mEmailPasswordView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            mEmailPasswordView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailPasswordView;
             cancel = true;
         }
 
@@ -88,6 +105,41 @@ public class Recover_Information extends AppCompatActivity {
             sendPassword(user);
         }
     }
+
+    private void attemptSendUsername() {
+        // Reset errors.
+        mEmailUsernameView.setError(null);
+
+        // Store values at the time of the recovery attempt.
+        String email = mEmailUsernameView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            mEmailUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mEmailUsernameView;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            mEmailUsernameView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailUsernameView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt recover and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user recovery attempt.
+            showProgress(true);
+            User user = new User(email);
+            sendUsername(user);
+        }
+    }
+
 
     private boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -124,7 +176,7 @@ public class Recover_Information extends AppCompatActivity {
 
     private void sendPassword(User user) {
         ServerRequest serverRequest = new ServerRequest(this);
-        serverRequest.SendEmailDataInBackground(user, new GetUserCallBack() {
+        serverRequest.SendEmailPasswordInBackground(user, new GetUserCallBack() {
             @Override
             public void done(User returnedUser) {
                 showProgress(false);
@@ -141,8 +193,34 @@ public class Recover_Information extends AppCompatActivity {
                         }
                     }, 3000);
                 } else {
-                    mEmailView.setError(getString(R.string.error_invalid_email));
-                    mEmailView.requestFocus();
+                    mEmailPasswordView.setError(getString(R.string.error_invalid_email));
+                    mEmailPasswordView.requestFocus();
+                }
+            }
+        });
+    }
+
+    private void sendUsername(User user) {
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.SendEmailUserNameInBackground(user, new GetUserCallBack() {
+            @Override
+            public void done(User returnedUser) {
+                showProgress(false);
+                if (returnedUser == null) {
+                    mRecoveryFormView.setVisibility(View.GONE);
+                    messageLayout.setVisibility(View.VISIBLE);
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            // this code will be executed after 3 seconds
+                            finish();
+                            Intent intent = new Intent(getApplicationContext(), Login.class);
+                            startActivityForResult(intent, 0);
+                        }
+                    }, 3000);
+                } else {
+                    mEmailUsernameView.setError(getString(R.string.error_invalid_email));
+                    mEmailUsernameView.requestFocus();
                 }
             }
         });
