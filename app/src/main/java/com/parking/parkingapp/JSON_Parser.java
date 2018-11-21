@@ -18,6 +18,7 @@ public class JSON_Parser {
                 JSONObject obj = ar.getJSONObject(x);
                 ParkingLotModel parkingLotModel = new ParkingLotModel();
 
+                parkingLotModel.setId(obj.getString("id"));
                 parkingLotModel.setName(obj.getString("name"));
                 parkingLotModel.setStatus(obj.getString("status"));
                 parkingLotModel.setAmountLeft(obj.getString("amountLeft"));

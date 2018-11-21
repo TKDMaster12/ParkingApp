@@ -55,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        userName.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Account.class);
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

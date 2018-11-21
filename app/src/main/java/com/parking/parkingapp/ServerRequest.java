@@ -17,8 +17,12 @@ public class ServerRequest {
         new FetchUserDataAsyncTask(user, CallBack).execute();
     }
 
-    public void SendEmailDataInBackground(User user, GetUserCallBack CallBack) {
-        new SendEmailDataAsyncTask(user, CallBack).execute();
+    public void SendEmailPasswordInBackground(User user, GetUserCallBack CallBack) {
+        new SendEmailPasswordAsyncTask(user, CallBack).execute();
+    }
+
+    public void SendEmailUserNameInBackground(User user, GetUserCallBack CallBack) {
+        new SendEmailUserNameAsyncTask(user, CallBack).execute();
     }
 
     public void storeUserDataInBackground(User user, GetUserCallBack userCallBack) {
@@ -71,11 +75,11 @@ public class ServerRequest {
         }
     }
 
-    public class SendEmailDataAsyncTask extends AsyncTask<Void, Void, User> {
+    public class SendEmailPasswordAsyncTask extends AsyncTask<Void, Void, User> {
         User user;
         GetUserCallBack userCallBack;
 
-        public SendEmailDataAsyncTask(User user, GetUserCallBack userCallBack) {
+        public SendEmailPasswordAsyncTask(User user, GetUserCallBack userCallBack) {
             this.user = user;
             this.userCallBack = userCallBack;
         }
@@ -85,6 +89,44 @@ public class ServerRequest {
             RequestPackage p = new RequestPackage();
             p.setMethod("POST");
             p.setUri(SERVER_ADDRESS + "forgetPassword.php");
+            p.setParam("email", user.email);
+
+            User returnedUser = null;
+            String content = HttpManager.getData(p);
+            try {
+                JSONObject jObject = new JSONObject(content);
+                if (jObject.length() != 0) {
+                    String name = jObject.getString("name");
+                    returnedUser = new User(name, user.email, user.username, user.password);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return returnedUser;
+        }
+
+        @Override
+        protected void onPostExecute(User returnedUser) {
+            userCallBack.done(returnedUser);
+            super.onPostExecute(returnedUser);
+        }
+    }
+
+    public class SendEmailUserNameAsyncTask extends AsyncTask<Void, Void, User> {
+        User user;
+        GetUserCallBack userCallBack;
+
+        public SendEmailUserNameAsyncTask(User user, GetUserCallBack userCallBack) {
+            this.user = user;
+            this.userCallBack = userCallBack;
+        }
+
+        @Override
+        protected User doInBackground(Void... params) {
+            RequestPackage p = new RequestPackage();
+            p.setMethod("POST");
+            p.setUri(SERVER_ADDRESS + "forgetUserName.php");
             p.setParam("email", user.email);
 
             User returnedUser = null;
