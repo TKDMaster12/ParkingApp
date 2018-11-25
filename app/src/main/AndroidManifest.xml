@@ -65,20 +65,19 @@
             android:value="@string/google_maps_key" />
 
         <provider
+            android:authorities="${applicationId}.provider"
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.parking.parkingapp.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_list" />
+                android:resource="@xml/file_paths"/>
         </provider>
-
         <activity android:name=".Account" />
-
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/file_list" />
+        <service
+            android:name=".LocationService"
+            android:enabled="true"
+            android:exported="false"></service>
     </application>
 
 </manifest>
