@@ -2,4 +2,4 @@
 TODO:
 - Find Car Function
 - Communicate with hardware
-- Update error messages
+- Update validataion & error messages
