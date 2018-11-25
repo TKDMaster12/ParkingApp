@@ -1,16 +1,24 @@
 package com.parking.parkingapp;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -36,9 +44,19 @@ public class Account extends AppCompatActivity {
     Button CameraBtn;
     @BindView(R.id.iv)
     ImageView imageView;
+    @BindView(R.id.change_password_button) Button ChangePasswordBtn;
+    @BindView(R.id.new_password)
+    EditText newPasswordtxt;
+    @BindView(R.id.current_password) EditText currentPasswordtxt;
+    @BindView(R.id.password_form) View mPasswordFormView;
+    @BindView(R.id.password_progress) View mProgressView;
 
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private String userChoosenTask;
+    UserLocalStore userLocalStore;
+    public static User user;
+    String currentPassword;
+    String newPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +83,16 @@ public class Account extends AppCompatActivity {
                     selectImage();
             }
         });
+
+        ChangePasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptChangePassword();
+            }
+        });
+
+        userLocalStore = new UserLocalStore(this);
+        user = userLocalStore.getLoggedInUser();
     }
 
     @Override
@@ -181,6 +209,107 @@ public class Account extends AppCompatActivity {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void attemptChangePassword() {
+        // Reset errors.
+        newPasswordtxt.setError(null);
+        currentPasswordtxt.setError(null);
+
+        // Store values at the time of the login attempt.
+        currentPassword = currentPasswordtxt.getText().toString();
+        newPassword = newPasswordtxt.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (TextUtils.isEmpty(currentPassword)) {
+            currentPasswordtxt.setError(getString(R.string.error_field_required));
+            focusView = currentPasswordtxt;
+            cancel = true;
+        }
+
+        // Check for a valid username.
+        if (TextUtils.isEmpty(newPassword)) {
+            newPasswordtxt.setError(getString(R.string.error_field_required));
+            focusView = newPasswordtxt;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            showProgress(true);
+
+            ChangeUserPassword task = new ChangeUserPassword();
+            task.execute();
+        }
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        mPasswordFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        mPasswordFormView.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mPasswordFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
+
+        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        mProgressView.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    public class ChangeUserPassword extends AsyncTask<Void, Void, String>
+    {
+        @Override
+        protected String doInBackground(Void... params) {
+            RequestPackage p = new RequestPackage();
+            p.setMethod("POST");
+            p.setUri("http://web-meisternj.com/Parking%20App/ChangePassword.php");
+            p.setParam("email", user.email);
+            p.setParam("oldPassword", currentPassword);
+            p.setParam("newPassword", newPassword);
+
+            return HttpManager.getData(p);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result.equals("success\n")) {
+                showProgress(false);
+                currentPasswordtxt.getText().clear();
+                newPasswordtxt.getText().clear();
+                Snackbar.make(mPasswordFormView, "Password Updated", Snackbar.LENGTH_LONG)
+                        .setAction("No action", null).show();
+            }
+            else
+            {
+                showProgress(false);
+                Snackbar.make(mPasswordFormView, "Error Updating Password", Snackbar.LENGTH_LONG)
+                        .setAction("No action", null).show();
+            }
         }
     }
 }

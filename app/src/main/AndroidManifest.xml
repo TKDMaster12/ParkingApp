@@ -73,7 +73,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
-        <activity android:name=".Account" />
+        <activity android:name=".Account"
+            android:windowSoftInputMode="stateHidden" />
         <service
             android:name=".LocationService"
             android:enabled="true"
