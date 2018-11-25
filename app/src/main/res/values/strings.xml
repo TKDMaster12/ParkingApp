@@ -52,4 +52,11 @@
 
     <!-- strings for home page -->
     <string name="home_title">Welcome</string>
+
+    <!-- strings for account page -->
+    <string name="account_new_password">New Password</string>
+    <string name="account_current_password">Current Password</string>
+    <string name="account_change_password">Change Password</string>
+    <string name="account_select_image">Select or Capture Image</string>
+
 </resources>

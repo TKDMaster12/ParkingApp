@@ -121,7 +121,7 @@ public class Parking_Lot extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if (result.equals("successsuccess")) {
+            if (result.equals("successsuccess\n")) {
                 finish();
                 Intent intent = new Intent(getApplicationContext(), Generated_Code.class);
                 intent.putExtra("CODE_KEY", newCode);
