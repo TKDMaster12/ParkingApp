@@ -49,9 +49,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Parking_Lot" />
         <activity android:name=".Help" />
-        <activity
-            android:name=".Find_Car"
-            android:label="@string/title_activity_find__car" />
+        <activity android:name=".Find_Car" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

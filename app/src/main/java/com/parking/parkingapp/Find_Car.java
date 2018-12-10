@@ -2,6 +2,7 @@ package com.parking.parkingapp;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,7 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Find_Car extends FragmentActivity implements OnMapReadyCallback {
+public class Find_Car extends AppCompatActivity  implements OnMapReadyCallback {
 
     GoogleMap mMap;
 
@@ -19,9 +20,9 @@ public class Find_Car extends FragmentActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_car);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+      //  SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        //        .findFragmentById(R.id.map);
+      //  mapFragment.getMapAsync(this);
     }
 
 
